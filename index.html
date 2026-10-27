@@ -965,7 +965,7 @@ function initMobileDetailingNav() {
     var fleetNav = document.querySelector('#page-fleet nav.nav-inner');
     if (fleetNav) {
       var cloned = fleetNav.cloneNode(true);
-      placeholder.appendChild(cloned);
+      placeholder.parentNode.insertBefore(cloned, placeholder);
     }
   }
 }
