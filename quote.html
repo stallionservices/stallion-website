@@ -41,13 +41,14 @@ a{text-decoration:none}
 :root{--accent:#00b4d8;--dark:#0d0d0d;--bd:'Bebas Neue',sans-serif}
 
 /* ── NAV ── */
-.lp-nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 5%;background:linear-gradient(135deg,#1a1a1a 0%,#2a2d32 100%);position:sticky;top:0;z-index:900;border-bottom:1px solid rgba(255,255,255,.04)}
+.lp-nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 5%;background:transparent;position:absolute;top:0;left:0;right:0;z-index:900;border-bottom:none}
 .lp-nav .logo-text{font-family:var(--bd);font-size:1.3rem;letter-spacing:.1em;color:#fff}
 .lp-nav .call-btn{background:var(--accent);color:#fff;font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.6rem 1.3rem;border-radius:50px;white-space:nowrap;transition:background .2s}
 .lp-nav .call-btn:hover{background:#00cef5}
 
 /* ── HERO + FORM ── */
 .hero-form{background:linear-gradient(135deg,#1a1a1a 0%,#2a2d32 100%);padding:2.5rem 5% 3rem;min-height:calc(100vh - 54px);display:flex;align-items:center;}
+.hero-form{background:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.72)),url('images/hero-bg.jpg') center center/cover no-repeat;padding:6rem 5% 3rem;min-height:100vh;display:flex;align-items:center;}
 .hero-form .hero-form-inner{width:100%}
 .hero-form-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
 @media(max-width:768px){.hero-form-inner{grid-template-columns:1fr;gap:1.5rem}}
@@ -80,7 +81,7 @@ a{text-decoration:none}
 .honeypot-field{display:none!important}
 
 /* ── TRUST STRIP ── */
-.trust-strip{background:#f8f9fa;padding:1.25rem 5%;border-top:1px solid #eee;border-bottom:1px solid #eee}
+.trust-strip{background:#fff;padding:1.25rem 5%;border-top:1px solid #eee;border-bottom:1px solid #eee}
 .trust-strip-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:1.25rem;justify-content:center;align-items:center}
 .trust-item{display:flex;align-items:center;gap:.45rem;font-size:.82rem;color:#555}
 .trust-item .accent{color:var(--accent);font-weight:700}
@@ -150,8 +151,9 @@ footer a:hover{color:#fff}
 .gal-wrap{position:relative;overflow:hidden;border-radius:16px;background:#111;user-select:none}
 .gal-track{display:flex;transition:transform .45s cubic-bezier(.4,0,.2,1)}
 .gal-slide{flex:0 0 100%}
-.gal-slide img{width:100%;height:480px;object-fit:cover;display:block}
-@media(max-width:767px){.gal-slide img{height:78vw;min-height:260px;max-height:400px}}
+.gal-slide{flex:0 0 100%;}
+.gal-slide img{width:100%;height:560px;object-fit:cover;object-position:center;display:block;}
+@media(max-width:767px){.gal-slide img{height:100vw;}}
 .gal-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:none;color:#fff;font-size:1.5rem;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .2s;padding:0;line-height:1}
 .gal-btn:hover{background:rgba(0,0,0,.72)}
 .gal-prev{left:10px}.gal-next{right:10px}
@@ -175,21 +177,24 @@ footer a:hover{color:#fff}
     <!-- Left: headline + checklist -->
     <div>
       <div class="hero-label">Mobile Detailing · Perth, WA</div>
-      <h1 class="hero-h1">GET A FREE<br><span>QUOTE TODAY</span></h1>
-      <p class="hero-sub">Professional mobile car detailing — we come to you. Fill out the form and we'll text you a price, usually same day.</p>
+      <h1 class="hero-h1">DETAILING DELIVERED<br><span>AT YOUR DOOR</span></h1>
+      <p class="hero-sub">Mobile car detailing in Perth. We come to your home or workplace, and Luke texts you a price the same day.</p>
       <ul class="hero-checks">
-        <li>🚗 We come to you — home or workplace</li>
-        <li>📍 Servicing Perth, NOR &amp; Surrounds</li>
-        <li>⚡ Same day reply guaranteed</li>
-        <li>⭐ 5-star rated by Perth families</li>
-        <li>💰 Options for every budget</li>
+        <li>🚗 We come to you — home, work, or wherever your car is</li>
+        <li>💎 Trusted with Perth's most premium vehicles</li>
+        <li>⚡ Same-day quote straight to your phone</li>
+        <li>⭐ Rated 5.0 on Google</li>
+        <li>📋 Digital invoices &amp; easy booking</li>
       </ul>
+      <div class="trust-row" style="margin-top:1rem;">
+        <a href="https://www.google.com/maps/search/stallion+services+perth" target="_blank" style="text-decoration:none;"><div class="trust-pill"><span class="star">★★★★★</span> 5.0 · Google Reviews</div></a>
+      </div>
     </div>
 
     <!-- Right: Netlify form -->
     <div class="form-card">
       <h2>GET MY QUOTE</h2>
-      <p>Fill in your details — we'll text you a price same day.</p>
+      <p>Fill in your details — Luke will text you a price same day.</p>
 
       <form name="ad-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="ad-quote">
@@ -384,6 +389,39 @@ footer a:hover{color:#fff}
   </div>
 </section>
 
+<style>
+.hiw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.wi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+@media(max-width:640px){.hiw-grid{grid-template-columns:1fr;}.wi-grid{grid-template-columns:1fr;}}
+</style>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section style="padding:3.5rem 5%;background:#fff;">
+  <div style="max-width:900px;margin:0 auto;text-align:center;">
+    <div style="font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#00b4d8;margin-bottom:.4rem;">Simple Process</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#111;letter-spacing:.03em;margin-bottom:.4rem;">HOW IT WORKS</h2>
+    <p style="font-size:.92rem;color:#666;margin-bottom:2.5rem;">From quote to showroom clean — three simple steps.</p>
+    <div class="hiw-grid">
+      <div style="background:#fff;border-radius:16px;padding:2rem 1.5rem;box-shadow:0 2px 16px rgba(0,0,0,.07);">
+        <div style="width:52px;height:52px;background:#00b4d8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#fff;margin:0 auto 1rem;">1</div>
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:#111;letter-spacing:.04em;margin-bottom:.5rem;">FILL IN THE FORM</h3>
+        <p style="font-size:.86rem;color:#666;line-height:1.6;">Takes 60 seconds. Tell us your car, what service you're after, and your suburb.</p>
+      </div>
+      <div style="background:#fff;border-radius:16px;padding:2rem 1.5rem;box-shadow:0 2px 16px rgba(0,0,0,.07);">
+        <div style="width:52px;height:52px;background:#00b4d8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#fff;margin:0 auto 1rem;">2</div>
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:#111;letter-spacing:.04em;margin-bottom:.5rem;">LUKE TEXTS YOU A PRICE</h3>
+        <p style="font-size:.86rem;color:#666;line-height:1.6;">Same-day reply guaranteed. Luke looks over your details and sends a custom price to your phone — no obligation.</p>
+      </div>
+      <div style="background:#fff;border-radius:16px;padding:2rem 1.5rem;box-shadow:0 2px 16px rgba(0,0,0,.07);">
+        <div style="width:52px;height:52px;background:#00b4d8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#fff;margin:0 auto 1rem;">3</div>
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:#111;letter-spacing:.04em;margin-bottom:.5rem;">WE COME TO YOU</h3>
+        <p style="font-size:.86rem;color:#666;line-height:1.6;">Luke shows up at your home or workplace with everything he needs. You walk away and come back to a showroom-fresh car.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- ══ REVIEWS ══ -->
 <section class="reviews-section">
   <div class="reviews-inner">
@@ -481,62 +519,124 @@ footer a:hover{color:#fff}
 </section>
 
 <!-- ══ PHOTO GALLERY ══ -->
-<section style="padding:3rem 5% 3rem;background:#fff;">
+<style>
+.pg-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+@media(max-width:900px){.pg-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:540px){.pg-grid{grid-template-columns:repeat(2,1fr);}}
+.pg-grid .pg-item{display:block;overflow:hidden;border-radius:10px;background:#f5f5f5;cursor:zoom-in;}
+.pg-grid img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform .3s;}
+.pg-item:hover img{transform:scale(1.04);}
+#pg-lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out;}
+#pg-lb.open{display:flex;}
+#pg-lb img{max-width:92vw;max-height:92vh;object-fit:contain;border-radius:8px;}
+#pg-lb-close{position:absolute;top:1rem;right:1.2rem;color:#fff;font-size:2rem;cursor:pointer;line-height:1;background:none;border:none;}
+</style>
+<section style="padding:3rem 5%;background:#fff;">
   <div style="max-width:1100px;margin:0 auto;">
     <div style="font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#00b4d8;margin-bottom:.4rem;">Our Work</div>
-    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#111;letter-spacing:.03em;margin-bottom:.3rem;">LATEST FROM US</h2>
-    <p style="font-size:.88rem;color:#777;margin-bottom:1.5rem;">Driveways of Perth.</p>
-    <div class="gal-wrap">
-      <div class="gal-track" id="galTrack">
-        <div class="gal-slide"><img src="images/pick-1.jpg" alt="Car detailing Perth" loading="lazy"></div>
-        <div class="gal-slide"><img src="images/pick-2.jpg" alt="Car detailing Perth" loading="lazy"></div>
-        <div class="gal-slide"><img src="images/pick-3.jpg" alt="Car detailing Perth" loading="lazy"></div>
-        <div class="gal-slide"><img src="images/pick-4.jpg" alt="Car detailing Perth" loading="lazy"></div>
-        <div class="gal-slide"><img src="images/pick-5.jpg" alt="Car detailing Perth" loading="lazy"></div>
-        <div class="gal-slide"><img src="images/pick-6.jpg" alt="Car detailing Perth" loading="lazy"></div>
-        <div class="gal-slide"><img src="images/pick-7.jpg" alt="Car detailing Perth" loading="lazy"></div>
-        <div class="gal-slide"><img src="images/pick-8.jpg" alt="Car detailing Perth" loading="lazy"></div>
-        <div class="gal-slide"><img src="images/pick-9.jpg" alt="Car detailing Perth" loading="lazy"></div>
-        <div class="gal-slide"><img src="images/pick-10.jpg" alt="Car detailing Perth" loading="lazy"></div>
-      </div>
-      <button class="gal-btn gal-prev" onclick="galMove(-1)">&#8249;</button>
-      <button class="gal-btn gal-next" onclick="galMove(1)">&#8250;</button>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#111;letter-spacing:.03em;margin-bottom:1rem;">LATEST FROM US</h2>
+    <div class="pg-grid">
+      <div class="pg-item" onclick="openLb(this)"><img src="images/new-3.jpg" alt="Lamborghini Huracán detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/pick-2.jpg" alt="Lamborghini Urus detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/new-2.jpg" alt="BMW M4 detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/pick-5.jpg" alt="Toyota Supra detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/new-5.jpg" alt="Porsche Taycan detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/pick-4.jpg" alt="Porsche Taycan detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/pick-6.jpg" alt="Mercedes AMG detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/pick-7.jpg" alt="Mercedes AMG A45 detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/new-7.jpg" alt="Range Rover detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/pick-3.jpg" alt="BMW X5 detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/new-6.jpg" alt="Tesla detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/new-4.jpg" alt="Fleet van detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/pick-1.jpg" alt="Ford Focus RS detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/new-1.jpg" alt="Motorcycle detailing Perth" loading="lazy"></div>
+      <div class="pg-item" onclick="openLb(this)"><img src="images/new-8.jpg" alt="Car detailing Perth" loading="lazy"></div>
     </div>
-    <div class="gal-dots" id="galDots"></div>
+    <div id="pg-lb" onclick="closeLb()">
+      <button id="pg-lb-close" onclick="closeLb()">✕</button>
+      <img id="pg-lb-img" src="" alt="">
+    </div>
+    <script>
+    function openLb(el){var src=el.querySelector('img').src;document.getElementById('pg-lb-img').src=src;document.getElementById('pg-lb').classList.add('open');document.body.style.overflow='hidden';}
+    function closeLb(){document.getElementById('pg-lb').classList.remove('open');document.body.style.overflow='';}
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
+    </script>
     <div style="text-align:center;margin-top:1.1rem;">
       <a href="https://stallionservices.com.au/#gallery" target="_blank" style="font-size:.78rem;color:#00b4d8;font-weight:600;letter-spacing:.06em;text-transform:uppercase;">View Full Gallery →</a>
     </div>
   </div>
 </section>
+
+<style>
+.faq-item{border-bottom:1px solid #e8e8e8;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;cursor:pointer;font-weight:600;font-size:.92rem;color:#111;gap:1rem;}
+.faq-q:hover{color:#00b4d8;}
+.faq-a{display:none;padding:0 0 1rem;font-size:.86rem;color:#555;line-height:1.65;}
+.faq-a.open{display:block;}
+.faq-arrow{font-size:1.2rem;color:#00b4d8;transition:transform .3s;line-height:1;flex-shrink:0;}
+.faq-arrow.open{transform:rotate(180deg);}
+</style>
+
+<!-- ══ FAQ ══ -->
+<section style="padding:3.5rem 5%;background:#fff;">
+  <div style="max-width:720px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:2rem;">
+      <div style="font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#00b4d8;margin-bottom:.4rem;">Got Questions?</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#111;letter-spacing:.03em;">FREQUENTLY ASKED</h2>
+    </div>
+    <div id="faqList">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How long does a detail take? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">It depends on the service and vehicle size, but most standard details take 1.5–3 hours. A full detail on an SUV can take 3–5 hours. Luke will give you an estimated timeframe when he sends your quote.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you need water or power at my place? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Yes — Luke will need access to a water tap and a power outlet at your property. A standard garden hose connection and a single power point is all that's needed. Just let him know when booking if access might be tricky.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What's the difference between an exterior and a full detail? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">An exterior detail covers the outside only — wash, wheels, tyres, windows, and trim. A full detail adds a complete interior clean: vacuum, wipe-down, dashboard, seats, door cards, and floor mats. A full detail is recommended if the car hasn't been professionally cleaned in a while.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How does the same-day pricing work? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Fill in the form and Luke will text you a custom price the same day — usually within a few hours. Prices are based on your car's size, condition, and the service you choose. No hidden fees, no obligation to book.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do I need to be home while you're detailing? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Not at all — many customers are at work while Luke details their car. As long as you can get him access to the vehicle beforehand, he'll handle the rest and let you know when it's done.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What areas of Perth do you service? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Stallion Services covers Perth metro, North of the River (NOR), and surrounding suburbs. If you're unsure whether we come to your area, just fill in the form and Luke will confirm.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What if it rains on the day? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">If the weather makes it impossible to detail your car properly, Luke will contact you to reschedule at no extra cost. Perth weather is usually on our side — but we'll always make sure the job is done right.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">My car is really dirty. Will you still take it on? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Absolutely — that's what we're here for. Whether it's pet hair, heavy stains, mud, or a car that hasn't been cleaned in years, Luke has seen it all. Just be upfront in the form about the condition and he'll price accordingly.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Is there a deposit required to book? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">For most jobs, no deposit is required — payment is made on the day once the job is complete. For jobs over $1,000, a 25% deposit is required to secure your booking.</div>
+      </div>
+      <div class="faq-item" style="border-bottom:none;">
+        <div class="faq-q" onclick="toggleFaq(this)">Can you do multiple cars in one visit? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Yes! Many customers book two or more cars at once. Just mention it in the form and Luke will factor it into your quote.</div>
+      </div>
+    </div>
+  </div>
+</section>
 <script>
-(function(){
-  var track=document.getElementById('galTrack');
-  var dotsWrap=document.getElementById('galDots');
-  var slides=track.children;
-  var cur=0,timer,startX=0;
-  var total=slides.length;
-  for(var i=0;i<total;i++){
-    var d=document.createElement('button');
-    d.className='gal-dot'+(i===0?' active':'');
-    d.setAttribute('data-i',i);
-    d.onclick=function(){clearTimeout(timer);goTo(+this.getAttribute('data-i'));autoplay();};
-    dotsWrap.appendChild(d);
-  }
-  function goTo(n){
-    cur=(n+total)%total;
-    track.style.transform='translateX(-'+cur*100+'%)';
-    var dots=dotsWrap.querySelectorAll('.gal-dot');
-    dots.forEach(function(d,i){d.classList.toggle('active',i===cur);});
-  }
-  window.galMove=function(dir){clearTimeout(timer);goTo(cur+dir);autoplay();};
-  function autoplay(){timer=setTimeout(function(){goTo(cur+1);autoplay();},4500);}
-  autoplay();
-  track.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;},{passive:true});
-  track.addEventListener('touchend',function(e){
-    var dx=e.changedTouches[0].clientX-startX;
-    if(Math.abs(dx)>40){clearTimeout(timer);goTo(cur+(dx<0?1:-1));autoplay();}
-  },{passive:true});
-})();
+function toggleFaq(el){
+  var a=el.nextElementSibling;
+  var arr=el.querySelector('.faq-arrow');
+  var isOpen=a.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(function(x){x.classList.remove('open');});
+  document.querySelectorAll('.faq-arrow').forEach(function(x){x.classList.remove('open');});
+  if(!isOpen){a.classList.add('open');arr.classList.add('open');}
+}
 </script>
 
 <!-- ══ BOTTOM CTA ══ -->
