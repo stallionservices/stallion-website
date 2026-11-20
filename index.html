@@ -683,6 +683,26 @@ footer p{font-size:0.7rem;color:rgba(255,255,255,0.3)}
   }
 }
 
+/* ── Contact Quote Form ── */
+.contact-quote-btn{background:var(--accent)!important;color:#fff!important;border:none!important;border-radius:50px!important;font-family:var(--font-b);font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.9rem 2rem;cursor:pointer;width:100%;margin-top:0.5rem;transition:background 0.2s!important;}
+.contact-quote-btn:hover{background:#00cef5!important;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,180,216,0.35)!important;}
+#page-contact .cq-wrapper{overflow:hidden;max-height:0;transition:max-height .4s ease,opacity .3s ease;opacity:0;pointer-events:none;margin-bottom:0}
+#page-contact .cq-wrapper.visible{max-height:800px;opacity:1;pointer-events:auto;margin-bottom:.1rem}
+#page-contact .cq-block{display:none!important}
+#page-contact .cq-block.active{display:block!important}
+#page-contact .cq-divider{border:none;border-top:1.5px dashed #e8e8e8;margin:.85rem 0 .7rem}
+#page-contact .cq-heading{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem}
+#page-contact .cq-label{font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#555;display:block;margin-bottom:.4rem;margin-top:.8rem}
+#page-contact .cq-label:first-of-type{margin-top:0}
+#page-contact .cq-pills{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.1rem}
+#page-contact .cq-pills input[type="radio"]{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+#page-contact .cq-pills label{padding:.4rem .85rem;border:1.5px solid #e0e0e0;border-radius:50px;font-size:.77rem;color:#555;cursor:pointer;transition:all .15s;white-space:nowrap;user-select:none;display:inline-block}
+#page-contact .cq-pills input[type="radio"]:checked + label{background:var(--accent);border-color:var(--accent);color:#fff}
+#page-contact .cq-pills label:hover{border-color:var(--accent);color:var(--accent)}
+#page-contact .cq-other-input{display:none;width:100%;margin-top:.45rem;padding:.62rem .9rem;border:1.5px solid var(--accent);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.85rem;color:#111;outline:none;background:#fafeff}
+#page-contact .cq-other-input.show{display:block}
+.form-note{font-size:.72rem;color:#999;text-align:center;margin-top:.5rem}
+
 </style>
 </head>
 <body>
@@ -781,17 +801,191 @@ footer p{font-size:0.7rem;color:rgba(255,255,255,0.3)}
         <div class="contact-card" style="grid-column:1/-1"><div class="clabel">Hours</div><div class="cval">Mon – Sun: 7am – 6pm</div></div>
       </div>
       <div class="section-divider"></div>
+      <h3 style="font-size:1.3rem;font-weight:700;color:#111;margin-bottom:0.3rem;">Get My Quote</h3>
+      <p style="font-size:0.85rem;color:#666;margin-bottom:1.5rem;">Fill in your details — Luke will text you a price same day.</p>
       <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form">
         <input type="hidden" name="form-name" value="contact"/>
         <p hidden><input name="bot-field"/></p>
-        <div class="form-row">
-          <div class="fg"><label>First Name</label><input type="text" name="first-name" placeholder="John" required/></div>
-          <div class="fg"><label>Last Name</label><input type="text" name="last-name" placeholder="Smith" required/></div>
+
+        <div class="fg">
+          <label>Service</label>
+          <select name="service" id="contact-service-select" required>
+            <option value="">Select a service…</option>
+            <option>Maintenance program</option>
+            <option>Paint correction</option>
+            <option>Ceramic coating</option>
+            <option>Fleet / business</option>
+            <option>Detailing services</option>
+          </select>
         </div>
-        <div class="fg"><label>Email</label><input type="email" name="email" placeholder="john@email.com" required/></div>
-        <div class="fg"><label>Phone</label><input type="tel" name="phone" placeholder="04XX XXX XXX"/></div>
-        <div class="fg"><label>Message</label><textarea name="message" placeholder="How can we help you?"></textarea></div>
-        <div><button type="submit" class="btn-submit">Send Message</button></div>
+
+        <!-- CONDITIONAL FOLLOW-UP QUESTIONS -->
+        <div class="cq-wrapper" id="contact-cq-wrapper">
+
+          <!-- MAINTENANCE PROGRAM -->
+          <div class="cq-block" data-service="Maintenance program" style="display:none!important">
+            <hr class="cq-divider">
+            <div class="cq-heading">A couple of quick questions…</div>
+            <label class="cq-label">How often do you currently wash your car?</label>
+            <div class="cq-pills">
+              <input type="radio" name="maint_wash" id="c_mw1" value="Rarely"><label for="c_mw1">Rarely</label>
+              <input type="radio" name="maint_wash" id="c_mw2" value="Monthly"><label for="c_mw2">Monthly</label>
+              <input type="radio" name="maint_wash" id="c_mw3" value="Every 2 weeks"><label for="c_mw3">Every 2 weeks</label>
+              <input type="radio" name="maint_wash" id="c_mw4" value="Weekly"><label for="c_mw4">Weekly</label>
+            </div>
+            <label class="cq-label">What condition is the car in right now?</label>
+            <div class="cq-pills">
+              <input type="radio" name="maint_condition" id="c_mcon1" value="Very clean"><label for="c_mcon1">Very clean</label>
+              <input type="radio" name="maint_condition" id="c_mcon2" value="Needs a tidy"><label for="c_mcon2">Needs a tidy</label>
+              <input type="radio" name="maint_condition" id="c_mcon3" value="Pretty dirty"><label for="c_mcon3">Pretty dirty</label>
+              <input type="radio" name="maint_condition" id="c_mcon4" value="Very neglected"><label for="c_mcon4">Very neglected</label>
+            </div>
+            <label class="cq-label">When was it last professionally detailed?</label>
+            <div class="cq-pills">
+              <input type="radio" name="maint_last" id="c_ml1" value="Never"><label for="c_ml1">Never</label>
+              <input type="radio" name="maint_last" id="c_ml2" value="Over a year ago"><label for="c_ml2">Over a year ago</label>
+              <input type="radio" name="maint_last" id="c_ml3" value="6–12 months ago"><label for="c_ml3">6–12 months</label>
+              <input type="radio" name="maint_last" id="c_ml4" value="Under 6 months ago"><label for="c_ml4">Under 6 months</label>
+            </div>
+          </div>
+
+          <!-- PAINT CORRECTION -->
+          <div class="cq-block" data-service="Paint correction" style="display:none!important">
+            <hr class="cq-divider">
+            <div class="cq-heading">A couple of quick questions…</div>
+            <label class="cq-label">What's the main paint issue?</label>
+            <div class="cq-pills">
+              <input type="radio" name="pc_issue" id="c_pci1" value="Swirl marks"><label for="c_pci1">Swirl marks</label>
+              <input type="radio" name="pc_issue" id="c_pci2" value="Light scratches"><label for="c_pci2">Light scratches</label>
+              <input type="radio" name="pc_issue" id="c_pci3" value="Dull / oxidised"><label for="c_pci3">Dull / oxidised</label>
+              <input type="radio" name="pc_issue" id="c_pci4" value="All of the above"><label for="c_pci4">All of the above</label>
+            </div>
+            <label class="cq-label">Last time professionally detailed?</label>
+            <div class="cq-pills">
+              <input type="radio" name="pc_last" id="c_pcl1" value="Under 6 months"><label for="c_pcl1">Under 6 months</label>
+              <input type="radio" name="pc_last" id="c_pcl2" value="6–12 months ago"><label for="c_pcl2">6–12 months</label>
+              <input type="radio" name="pc_last" id="c_pcl3" value="Over a year"><label for="c_pcl3">Over a year</label>
+              <input type="radio" name="pc_last" id="c_pcl4" value="Never properly"><label for="c_pcl4">Never properly</label>
+            </div>
+            <label class="cq-label">Any coating / wax currently on it?</label>
+            <div class="cq-pills">
+              <input type="radio" name="pc_coat" id="c_pcc1" value="Yes"><label for="c_pcc1">Yes</label>
+              <input type="radio" name="pc_coat" id="c_pcc2" value="No"><label for="c_pcc2">No</label>
+              <input type="radio" name="pc_coat" id="c_pcc3" value="Not sure"><label for="c_pcc3">Not sure</label>
+            </div>
+          </div>
+
+          <!-- CERAMIC COATING -->
+          <div class="cq-block" data-service="Ceramic coating" style="display:none!important">
+            <hr class="cq-divider">
+            <div class="cq-heading">A couple of quick questions…</div>
+            <label class="cq-label">Current protection on the paint?</label>
+            <div class="cq-pills">
+              <input type="radio" name="cc_prot" id="c_ccp1" value="Nothing"><label for="c_ccp1">Nothing</label>
+              <input type="radio" name="cc_prot" id="c_ccp2" value="Wax / sealant"><label for="c_ccp2">Wax / sealant</label>
+              <input type="radio" name="cc_prot" id="c_ccp3" value="Existing coating"><label for="c_ccp3">Existing coating</label>
+              <input type="radio" name="cc_prot" id="c_ccp4" value="Not sure"><label for="c_ccp4">Not sure</label>
+            </div>
+            <label class="cq-label">How old is the car / paintwork?</label>
+            <div class="cq-pills">
+              <input type="radio" name="cc_age" id="c_cca1" value="Under 2 years"><label for="c_cca1">Under 2 years</label>
+              <input type="radio" name="cc_age" id="c_cca2" value="2–5 years"><label for="c_cca2">2–5 years</label>
+              <input type="radio" name="cc_age" id="c_cca3" value="5+ years"><label for="c_cca3">5+ years</label>
+            </div>
+            <label class="cq-label">Coating tier preference?</label>
+            <div class="cq-pills">
+              <input type="radio" name="cc_tier" id="c_cct1" value="Entry (1–2 yr)"><label for="c_cct1">Entry (1–2 yr)</label>
+              <input type="radio" name="cc_tier" id="c_cct2" value="Mid (3–5 yr)"><label for="c_cct2">Mid (3–5 yr)</label>
+              <input type="radio" name="cc_tier" id="c_cct3" value="Premium (5+ yr)"><label for="c_cct3">Premium (5+ yr)</label>
+              <input type="radio" name="cc_tier" id="c_cct4" value="Need advice"><label for="c_cct4">Need advice</label>
+            </div>
+          </div>
+
+          <!-- FLEET / BUSINESS -->
+          <div class="cq-block" data-service="Fleet / business" style="display:none!important">
+            <hr class="cq-divider">
+            <div class="cq-heading">A couple of quick questions…</div>
+            <label class="cq-label">Number of vehicles in your fleet?</label>
+            <div class="cq-pills">
+              <input type="radio" name="fl_size" id="c_fls1" value="1–3"><label for="c_fls1">1–3</label>
+              <input type="radio" name="fl_size" id="c_fls2" value="4–10"><label for="c_fls2">4–10</label>
+              <input type="radio" name="fl_size" id="c_fls3" value="11–20"><label for="c_fls3">11–20</label>
+              <input type="radio" name="fl_size" id="c_fls4" value="20+"><label for="c_fls4">20+</label>
+            </div>
+            <label class="cq-label">How often do you need them serviced?</label>
+            <div class="cq-pills">
+              <input type="radio" name="fl_freq" id="c_flf1" value="Weekly"><label for="c_flf1">Weekly</label>
+              <input type="radio" name="fl_freq" id="c_flf2" value="Fortnightly"><label for="c_flf2">Fortnightly</label>
+              <input type="radio" name="fl_freq" id="c_flf3" value="Monthly"><label for="c_flf3">Monthly</label>
+              <input type="radio" name="fl_freq" id="c_flf4" value="One-off"><label for="c_flf4">One-off</label>
+            </div>
+            <label class="cq-label">Vehicle types?</label>
+            <div class="cq-pills">
+              <input type="radio" name="fl_type" id="c_flt1" value="Passenger cars"><label for="c_flt1">Passenger cars</label>
+              <input type="radio" name="fl_type" id="c_flt2" value="Vans / utes"><label for="c_flt2">Vans / utes</label>
+              <input type="radio" name="fl_type" id="c_flt3" value="Mix of both"><label for="c_flt3">Mix of both</label>
+              <input type="radio" name="fl_type" id="c_flt4" value="Heavy vehicles"><label for="c_flt4">Heavy vehicles</label>
+            </div>
+          </div>
+
+          <!-- DETAILING SERVICES -->
+          <div class="cq-block" data-service="Detailing services" style="display:none!important">
+            <hr class="cq-divider">
+            <div class="cq-heading">A couple of quick questions…</div>
+            <label class="cq-label">Last time the car was properly detailed?</label>
+            <div class="cq-pills">
+              <input type="radio" name="ds_last" id="c_dsl1" value="Under 6 months"><label for="c_dsl1">Under 6 months</label>
+              <input type="radio" name="ds_last" id="c_dsl2" value="6–12 months ago"><label for="c_dsl2">6–12 months</label>
+              <input type="radio" name="ds_last" id="c_dsl3" value="Over a year"><label for="c_dsl3">Over a year</label>
+              <input type="radio" name="ds_last" id="c_dsl4" value="Never properly"><label for="c_dsl4">Never properly</label>
+            </div>
+            <label class="cq-label">What's your rough budget?</label>
+            <div class="cq-pills">
+              <input type="radio" name="ds_budget" id="c_dsb1" value="Under $150"><label for="c_dsb1">Under $150</label>
+              <input type="radio" name="ds_budget" id="c_dsb2" value="$150–$300"><label for="c_dsb2">$150–$300</label>
+              <input type="radio" name="ds_budget" id="c_dsb3" value="$300–$500"><label for="c_dsb3">$300–$500</label>
+              <input type="radio" name="ds_budget" id="c_dsb4" value="$500+"><label for="c_dsb4">$500+</label>
+            </div>
+            <label class="cq-label">Any specific concerns?</label>
+            <div class="cq-pills" data-other-target="c_ds_concern_other">
+              <input type="radio" name="ds_concern" id="c_dsc1" value="Pet hair"><label for="c_dsc1">Pet hair</label>
+              <input type="radio" name="ds_concern" id="c_dsc2" value="Stains / odour"><label for="c_dsc2">Stains / odour</label>
+              <input type="radio" name="ds_concern" id="c_dsc3" value="Heavy dirt"><label for="c_dsc3">Heavy dirt</label>
+              <input type="radio" name="ds_concern" id="c_dsc4" value="General refresh"><label for="c_dsc4">General refresh</label>
+              <input type="radio" name="ds_concern" id="c_dsc5" value="Other"><label for="c_dsc5">Other</label>
+            </div>
+            <input type="text" name="ds_concern_other" id="c_ds_concern_other" class="cq-other-input" placeholder="Tell us a bit more…">
+          </div>
+
+        </div>
+        <!-- END CONDITIONAL QUESTIONS -->
+
+        <div class="fg">
+          <label>Make &amp; Model</label>
+          <input type="text" name="make_model" placeholder="e.g. Toyota RAV4 2021" required/>
+        </div>
+        <div class="form-row">
+          <div class="fg">
+            <label>Suburb</label>
+            <input type="text" name="suburb" placeholder="e.g. Fremantle" required/>
+          </div>
+          <div class="fg">
+            <label>Your Name</label>
+            <input type="text" name="name" placeholder="First name" required/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="fg">
+            <label>Mobile Number</label>
+            <input type="tel" name="phone" placeholder="04xx xxx xxx" required/>
+          </div>
+          <div class="fg">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="you@email.com" required/>
+          </div>
+        </div>
+        <button type="submit" class="contact-quote-btn">GET MY QUOTE →</button>
+        <p class="form-note">Same day reply</p>
       </form>
     </div>
     <footer style="background:#fff;border-top:1px solid #eee;padding:1.5rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
@@ -2685,6 +2879,51 @@ function mdEnquire() {
 </div>
 <!-- END PAINT CORRECTION & CERAMIC PAGE -->
 
+<script>
+// ── Contact page: Conditional follow-up questions ──
+(function(){
+  var sel = document.getElementById('contact-service-select');
+  var wrapper = document.getElementById('contact-cq-wrapper');
+  if(!sel || !wrapper) return;
+  sel.addEventListener('change', function(){
+    var val = this.value;
+    var blocks = wrapper.querySelectorAll('.cq-block');
+    var matched = null;
+    blocks.forEach(function(b){
+      b.style.setProperty('display','none','important');
+      b.classList.remove('active');
+      if(b.getAttribute('data-service') === val) matched = b;
+    });
+    if(matched){
+      matched.style.removeProperty('display');
+      matched.classList.add('active');
+      wrapper.classList.add('visible');
+    } else {
+      wrapper.classList.remove('visible');
+    }
+  });
+})();
+
+// ── Contact page: "Other" text input reveal ──
+(function(){
+  var wrapper = document.getElementById('contact-cq-wrapper');
+  if(!wrapper) return;
+  wrapper.querySelectorAll('.cq-pills[data-other-target]').forEach(function(pills){
+    pills.addEventListener('change', function(e){
+      var otherId = pills.getAttribute('data-other-target');
+      var otherEl = document.getElementById(otherId);
+      if(!otherEl) return;
+      if(e.target.value === 'Other'){
+        otherEl.classList.add('show');
+        otherEl.focus();
+      } else {
+        otherEl.classList.remove('show');
+        otherEl.value = '';
+      }
+    });
+  });
+})();
+</script>
 
 </body>
 </html
