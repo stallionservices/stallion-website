@@ -195,7 +195,7 @@ footer a:hover{color:#fff}
       <h2>GET MY QUOTE</h2>
       <p>Fill in your details and we'll be in touch shortly with your quote.</p>
 
-      <form name="ad-quote" action="/thank-you.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <form name="ad-quote" enctype="multipart/form-data" action="/thank-you.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="ad-quote">
         <p class="honeypot-field"><label>Don't fill this out: <input name="bot-field"></label></p>
         
@@ -380,7 +380,15 @@ footer a:hover{color:#fff}
           </div>
         </div>
 
-        <input type="hidden" name="details"><input type="hidden" name="subject" data-remove-prefix><input type="hidden" name="source" id="source-field">
+        <div class="ss-photos">
+            <label class="ss-photos-label">Photos of your car <span>(optional, up to 3)</span></label>
+            <button type="button" class="ss-photo-btn">📷 <span>Add photos</span></button>
+            <input type="file" class="ss-picker" accept="image/*" multiple hidden>
+            <input type="file" name="photo_1" accept="image/*" hidden><input type="file" name="photo_2" accept="image/*" hidden><input type="file" name="photo_3" accept="image/*" hidden>
+            <div class="ss-thumbs"></div>
+            <div class="ss-photo-note"></div>
+          </div>
+          <input type="hidden" name="details"><input type="hidden" name="subject" data-remove-prefix><input type="hidden" name="source" id="source-field">
         <button type="submit" class="btn-submit">GET MY QUOTE →</button>
         <p class="form-note">No obligation · We'll be in touch shortly</p>
       </form>
