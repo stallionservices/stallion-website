@@ -1620,6 +1620,16 @@ function customAmt(el) {
           </div>
           <p style="font-size:0.82rem;color:#555;line-height:1.6;margin:0">"Bloody top service! He has been doing all my family's cars for the past year now, couldn't recommend anyone more than this guy."</p>
         </div>
+        <div style="background:#f7f7f7;border-radius:12px;padding:1.3rem 1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.6rem">
+            <div style="width:36px;height:36px;border-radius:50%;background:#00b4d8;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.9rem;flex-shrink:0;">J</div>
+            <div>
+              <div style="font-weight:700;font-size:0.88rem;color:#111">Jessica Debarro</div>
+              <div style="color:#f9b208;font-size:0.82rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            </div>
+          </div>
+          <p style="font-size:0.82rem;color:#555;line-height:1.6;margin:0">"Luke absolutely transformed my car — it looks like it just rolled off the showroom floor! My rims are a nightmare to clean but he worked his magic. The attention to detail is outstanding. I highly recommend Stallion Services to anyone looking to bring their car back to life."</p>
+        </div>
         <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.25rem">
           <div style="color:#f4b400;font-size:1rem">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <div style="font-size:0.75rem;color:#888">5.0 · Google Reviews</div>
@@ -1718,6 +1728,19 @@ function customAmt(el) {
     vids().forEach(function(v){v.addEventListener('click',function(){if(v.paused){load(v);v.play();}else{v.pause();}});});
     sync();
   }
+  // Size the video so its bottom lines up with the bottom of the reviews column (desktop only)
+  function fitToReviews(){
+    var player=document.getElementById('mdv-player'); if(!player) return;
+    var reel=document.getElementById('md-video-reel'), col=reel.parentElement.children[0];
+    player.style.height=''; player.style.maxWidth='';
+    if(window.innerWidth<=768 || !col || col===reel) return;
+    var h=col.getBoundingClientRect().bottom-player.getBoundingClientRect().top;
+    var w=Math.min(h*9/16, reel.getBoundingClientRect().width);
+    if(h>200){ player.style.maxWidth=w+'px'; player.style.height=h+'px'; }
+  }
+  window.addEventListener('resize',fitToReviews);
+  window.addEventListener('load',fitToReviews);
+  new MutationObserver(function(){setTimeout(fitToReviews,50);}).observe(document.getElementById('page-mobile-detailing'),{attributes:true,attributeFilter:['class']});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
