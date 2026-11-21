@@ -88,6 +88,7 @@ var STALLION_TRACKING = {
   function pageView() {
     var page = (location.hash.replace('#', '') || 'home');
     if (location.pathname.indexOf('quote') !== -1) page = 'quote-landing';
+    if (location.pathname.indexOf('thank-you') !== -1) page = 'thank-you';
     if (page === lastPage) return; lastPage = page;
     var title = 'Stallion — ' + page.replace(/-/g, ' ');
     try { if (C.GA4_ID) gtag('event', 'page_view', { page_title: title, page_location: location.href, page_path: location.pathname + (location.hash || '') }); } catch (e) {}
@@ -112,21 +113,25 @@ var STALLION_TRACKING = {
     else if (/q-next-btn|qGoStep/.test(a.className + oc)) track('quote_step', { step: oc, page: where });
   }, true);
 
-  /* Form submissions = leads */
+  /* Form submissions = leads.
+     On submit we remember the details; the Lead is counted on the thank-you page,
+     so only quotes that actually went through are counted. */
   document.addEventListener('submit', function (e) {
     var form = e.target;
-    if (!form.hasAttribute || !form.hasAttribute('data-netlify') || form._tracked) return;
+    if (!form.hasAttribute || !form.hasAttribute('data-netlify')) return;
     fillSourceFields();
     var fd = new FormData(form);
-    var service = fd.get('service') || '';
-    var params = { form_name: form.getAttribute('name'), service: service, suburb: fd.get('suburb') || '' };
-    track('generate_lead', params, { name: 'Lead' }, { content_name: service || form.getAttribute('name') });
-    if (C.GOOGLE_ADS_ID && C.GOOGLE_ADS_LEAD_LABEL) { try { gtag('event', 'conversion', { send_to: C.GOOGLE_ADS_ID + '/' + C.GOOGLE_ADS_LEAD_LABEL }); } catch (x) {} }
-    if (C.GA4_ID || C.META_PIXEL_ID) { // give the trackers a moment before the page changes
-      e.preventDefault(); form._tracked = true;
-      setTimeout(function () { HTMLFormElement.prototype.submit.call(form); }, 500);
-    }
+    var info = { form_name: form.getAttribute('name'), service: fd.get('service') || '', suburb: fd.get('suburb') || '' };
+    try { sessionStorage.setItem('ss_lead', JSON.stringify(info)); } catch (x) {}
+    track('form_submit_attempt', info);
   }, true);
+  function leadOnThankYou() {
+    if (location.pathname.indexOf('thank-you') === -1) return;
+    var info = {}; try { info = JSON.parse(sessionStorage.getItem('ss_lead') || '{}'); sessionStorage.removeItem('ss_lead'); } catch (x) {}
+    if (!info.form_name) return; // refresh or direct visit: don't double count
+    track('generate_lead', info, { name: 'Lead' }, { content_name: info.service || info.form_name });
+    if (C.GOOGLE_ADS_ID && C.GOOGLE_ADS_LEAD_LABEL) { try { gtag('event', 'conversion', { send_to: C.GOOGLE_ADS_ID + '/' + C.GOOGLE_ADS_LEAD_LABEL }); } catch (x) {} }
+  }
 
   /* Videos: first play of each */
   document.addEventListener('play', function (e) {
@@ -143,7 +148,7 @@ var STALLION_TRACKING = {
   }, { passive: true });
 
   function start() {
-    fillSourceFields(); pageView();
+    fillSourceFields(); pageView(); leadOnThankYou();
     if (typeof window.showPage === 'function' && !window.showPage._tracked) {
       var orig = window.showPage;
       window.showPage = function () { var r = orig.apply(this, arguments); setTimeout(pageView, 0); return r; };
