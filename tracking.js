@@ -7,7 +7,7 @@ var STALLION_TRACKING = {
   GOOGLE_ADS_ID: "", // Google Ads (optional) e.g. "AW-123456789"
   GOOGLE_ADS_LEAD_LABEL: "", // Google Ads conversion label for leads (optional)
   META_PIXEL_ID: "2076432399539577", // Meta (Facebook/Instagram) Pixel e.g. "123456789012345"
-  CLARITY_ID:  ""    // Microsoft Clarity  e.g. "abcd1234ef"
+  CLARITY_ID:  "zh0c78jc4s"    // Microsoft Clarity  e.g. "abcd1234ef"
 };
 
 /* ---------------- nothing below needs editing ---------------- */
