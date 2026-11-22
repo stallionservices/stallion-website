@@ -4,6 +4,10 @@
    - Optional photo upload (up to 3), shrunk on the phone before sending */
 (function () {
   var PILLS = '.cq-pills, .cqf-pills';
+  // Netlify removes the data-netlify attribute when it publishes the site,
+  // so spot our forms by their hidden "form-name" field instead.
+  function isQuoteForm(f) { return !!(f && f.tagName === 'FORM' && f.querySelector('input[name="form-name"]')); }
+  function quoteForms() { return Array.prototype.filter.call(document.querySelectorAll('form'), isQuoteForm); }
   var MAX_PHOTOS = 3, MAX_SIDE = 1600, QUALITY = 0.8, MAX_TOTAL = 7.5 * 1024 * 1024;
 
   /* ---------- styles ---------- */
@@ -167,7 +171,7 @@
   /* ---------- submit ---------- */
   document.addEventListener('submit', function (e) {
     var form = e.target;
-    if (!form.hasAttribute || !form.hasAttribute('data-netlify')) return;
+    if (!isQuoteForm(form)) return;
     if (!validate(form)) { e.preventDefault(); e.stopImmediatePropagation(); return; }
     var get = function (n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ''; };
     var details = form.querySelector('input[name="details"]');
@@ -183,12 +187,12 @@
 
   // if someone taps Back after sending, make the button usable again
   window.addEventListener('pageshow', function () {
-    document.querySelectorAll('form[data-netlify] [type="submit"]').forEach(function (b) {
+    quoteForms().map(function (f) { return f.querySelector('[type="submit"]'); }).filter(Boolean).forEach(function (b) {
       if (b.disabled) { b.disabled = false; b.textContent = b.dataset.label || 'GET MY QUOTE →'; }
     });
   });
   function init() {
-    document.querySelectorAll('form[data-netlify]').forEach(function (f) {
+    quoteForms().forEach(function (f) {
       var b = f.querySelector('[type="submit"]'); if (b) b.dataset.label = b.textContent;
       setupPhotos(f);
     });
